@@ -1,0 +1,304 @@
+Tests for PlayList_new
+======================
+Creates an empty non NULL playlist: 
+   PASSED (0.50 ms)
+
+Allocates the correct amount of memory: 
+   PASSED (0.60 ms)
+
+Passed: 2, Failed: 0, Total: 2, Details: ++
+
+Tests for PlayList_insertAtFront
+================================
+Assertion failure on NULL playlist: 
+   PASSED (death test) (83.10 ms)
+
+Inserts into an empty list: 
+   PASSED (0.66 ms)
+
+Inserts into a non empty list: 
+   PASSED (0.64 ms)
+
+Allocates memory for one node inserting in empty list: 
+   PASSED (0.50 ms)
+
+Allocates memory for one node inserting in non empty list: 
+   PASSED (0.50 ms)
+
+Passed: 5, Failed: 0, Total: 5, Details: +++++
+
+Tests for PlayList_insertInOrder
+================================
+Assertion failure on NULL playlist: 
+   PASSED (death test) (77.57 ms)
+
+Inserts into an empty list: 
+   PASSED (0.74 ms)
+
+Inserts at the beginning of a sorted list: 
+   PASSED (0.64 ms)
+
+Inserts into the middle of a sorted list: 
+   PASSED (0.57 ms)
+
+Inserts at the end of a sorted list: 
+   PASSED (0.60 ms)
+
+Allocates memory for just one node: 
+   PASSED (0.50 ms)
+
+Passed: 6, Failed: 0, Total: 6, Details: ++++++
+
+Tests for PlayList_insertAtEnd
+==============================
+Assertion failure on NULL playlist: 
+   PASSED (death test) (79.63 ms)
+
+Inserts into an empty list: 
+   PASSED (0.69 ms)
+
+Inserts at the end of a non empty list: 
+   PASSED (0.60 ms)
+
+Allocates memory for just one node: 
+   PASSED (0.55 ms)
+
+Passed: 4, Failed: 0, Total: 4, Details: ++++
+
+Tests for PlayList_insertAfter
+==============================
+Assertion failure on NULL playlist: 
+   PASSED (death test) (85.30 ms)
+
+Inserts after a song in the middle: 
+   PASSED (0.69 ms)
+
+Inserts after a song in the middle: 
+   PASSED (0.61 ms)
+
+Inserts after the last song: 
+   PASSED (0.51 ms)
+
+Fails to insert when target song is not found: 
+   PASSED (0.56 ms)
+
+Allocates memory for just one node on success: 
+   PASSED (0.51 ms)
+
+Makes no memory changes on failure: 
+   PASSED (0.51 ms)
+
+Passed: 7, Failed: 0, Total: 7, Details: +++++++
+
+Tests for PlayList_insertBefore
+===============================
+Assertion failure on NULL playlist: 
+   PASSED (death test) (79.83 ms)
+
+Inserts before the last song: 
+   PASSED (0.67 ms)
+
+Inserts before a song in the middle: 
+   PASSED (0.54 ms)
+
+Inserts before the first song: 
+   PASSED (0.50 ms)
+
+Allocates memory for just one node on success: 
+   PASSED (0.51 ms)
+
+Passed: 5, Failed: 0, Total: 5, Details: +++++
+
+Tests for PlayList_deleteFromFront
+==================================
+Assertion failure on NULL playlist: 
+   PASSED (death test) (90.34 ms)
+
+Asserts on empty playlist: 
+   PASSED (death test) (91.17 ms)
+
+Deletes the only element: 
+   PASSED (0.62 ms)
+
+Deletes the first element: 
+   PASSED (0.52 ms)
+
+Frees memory for just one node: 
+   PASSED (0.53 ms)
+
+Passed: 5, Failed: 0, Total: 5, Details: +++++
+
+Tests for PlayList_deleteSong
+=============================
+Assertion failure on NULL playlist: 
+   PASSED (death test) (97.23 ms)
+
+Deletes the only song: 
+   PASSED (0.84 ms)
+
+Deletes the first song: 
+   PASSED (0.73 ms)
+
+Deletes a song in the middle: 
+   PASSED (0.61 ms)
+
+Deletes the last song: 
+   PASSED (0.55 ms)
+
+Returns false if song not found: 
+   PASSED (0.68 ms)
+
+Frees memory for one node on success: 
+   PASSED (0.75 ms)
+
+Makes no memory allocations or deallocations if song not found: 
+   PASSED (0.72 ms)
+
+Does not modify the playlist structure if song not found: 
+   PASSED (0.59 ms)
+
+Passed: 9, Failed: 0, Total: 9, Details: +++++++++
+
+Tests for PlayList_print
+========================
+Assertion failure on NULL playlist: 
+   PASSED (death test) (97.44 ms)
+
+Prints an empty list: 
+   PASSED (0.65 ms)
+
+Prints a single item list: 
+   PASSED (0.73 ms)
+
+Prints a multiple item list: 
+   PASSED (0.63 ms)
+
+Makes no memory allocations or deallocations: 
+   PASSED (0.68 ms)
+
+Does not modify the playlist structure: 
+   PASSED (0.59 ms)
+
+Passed: 6, Failed: 0, Total: 6, Details: ++++++
+
+Tests for PlayList_sort
+=======================
+Assertion failure on NULL playlist: 
+   PASSED (death test) (98.73 ms)
+
+Sorts an empty list: 
+   PASSED (0.67 ms)
+
+Sorts an already sorted list: 
+   PASSED (0.56 ms)
+
+Sorts an unsorted list: 
+   PASSED (0.56 ms)
+
+Makes no memory allocations or deallocations: 
+   PASSED (0.58 ms)
+
+Passed: 5, Failed: 0, Total: 5, Details: +++++
+
+Tests for PlayList_deleteAll
+============================
+Assertion failure on NULL playlist: 
+   PASSED (death test) (97.48 ms)
+
+Deletes from an empty list: 
+   PASSED (0.74 ms)
+
+Deletes all from a non empty list: 
+   PASSED (0.66 ms)
+
+Frees memory for all nodes: 
+   PASSED (0.63 ms)
+
+Passed: 4, Failed: 0, Total: 4, Details: ++++
+
+Tests for PlayList_playingSong
+==============================
+Assertion failure on NULL playlist: 
+   PASSED (death test) (89.87 ms)
+
+Returns NULL if playlist is empty: 
+   PASSED (0.96 ms)
+
+Returns the correct song when one is playing: 
+   PASSED (0.85 ms)
+
+Allocates memory for the returned string: 
+   PASSED (1.02 ms)
+
+Does not modify the playlist structure: 
+   PASSED (0.67 ms)
+
+Passed: 5, Failed: 0, Total: 5, Details: +++++
+
+Tests for PlayList_playNext
+===========================
+Assertion failure on NULL playlist: 
+   PASSED (death test) (93.17 ms)
+
+Does nothing at the end of the list: 
+   PASSED (0.79 ms)
+
+Advances to the next song when not at the end: 
+   PASSED (0.87 ms)
+
+Makes no memory changes: 
+   PASSED (0.56 ms)
+
+Does not modify the playlist linked structure: 
+   PASSED (0.53 ms)
+
+Passed: 5, Failed: 0, Total: 5, Details: +++++
+
+Tests for PlayList_playPrevious
+===============================
+Assertion failure on NULL playlist: 
+   PASSED (death test) (97.97 ms)
+
+Does nothing at the beginning of the list: 
+   PASSED (0.84 ms)
+
+Moves to the previous song when not at the beginning: 
+   PASSED (0.68 ms)
+
+Makes no memory changes: 
+   PASSED (0.73 ms)
+
+Does not modify the playlist linked structure: 
+   PASSED (0.68 ms)
+
+Passed: 5, Failed: 0, Total: 5, Details: +++++
+
+Tests for PlayList_free
+=======================
+Assertion failure on NULL playlist: 
+   PASSED (death test) (91.17 ms)
+
+Assertion failure on pointer to NULL playlist: 
+   PASSED (death test) (98.33 ms)
+
+Frees an empty playlist and sets pointer to NULL: 
+   PASSED (0.97 ms)
+
+Frees a non empty playlist and sets pointer to NULL: 
+   PASSED (0.65 ms)
+
+Frees all nodes and the playlist struct: 
+   PASSED (0.64 ms)
+
+Passed: 5, Failed: 0, Total: 5, Details: +++++
+
+========================================
+ Overall Summary
+========================================
+Suites run:    15
+Total tests:   78
+Passed:        78
+Failed:        0
+Success rate:  100.00%
+Total time:    1490.16 ms
+========================================
