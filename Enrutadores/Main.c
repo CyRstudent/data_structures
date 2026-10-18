@@ -11,7 +11,7 @@ int main(void) {
 
 	bool f1 = insertarPaquete(&test1, 13, "Jaja broma graciosa", 2);
 	bool f2 = insertarPaquete(&test1, 13, "Que ha dicho el de arriba este?", 1);
-	bool f3 = insertarPaquete(&test1, 14, "jijijaja ahora soy yo el que está encima", 5);
+	bool f3 = insertarPaquete(&test1, 14, "jijijija ahora soy yo el que está encima", 5);
 	bool f4 = insertarPaquete(&test1, 2, "Soy shikitillo", 9);
 	assert(f1 && f2 && f3 && f4 && "Fallo en la función insertarPaquete");
 
