@@ -1,11 +1,9 @@
 #include "cola.h"
 
-#include <assert.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 #include <stdio.h>
 
 struct Cola * inicializarCola(void) {
