@@ -1,5 +1,6 @@
 package org.uma.ed.datastructures.stack;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -83,7 +84,9 @@ public class ArrayStack<T> extends AbstractStack<T> implements Stack<T> {
    * @return an empty {@code ArrayStack} with the given capacity.
    * @throws IllegalArgumentException if the initial capacity is not positive.
    */
-  public static <T> ArrayStack<T> withCapacity(int initialCapacity) { throw new UnsupportedOperationException("Not implemented yet"); }
+  public static <T> ArrayStack<T> withCapacity(int initialCapacity) {
+    return new ArrayStack<T>(initialCapacity);
+  }
 
   /**
    * Creates a new {@code ArrayStack} containing the given elements.
@@ -136,7 +139,18 @@ public class ArrayStack<T> extends AbstractStack<T> implements Stack<T> {
    * @param that the {@code ArrayStack} to be copied.
    * @return a new {@code ArrayStack} with the same elements and order.
    */
-  public static <T> ArrayStack<T> copyOf(ArrayStack<T> that) { throw new UnsupportedOperationException("Not implemented yet"); }
+  public static <T> ArrayStack<T> copyOf(ArrayStack<T> that) {
+    ArrayStack<T> res = new ArrayStack<>(that.elements.length);
+    System.arraycopy(
+            that.elements,
+            0,
+            res.elements,
+            0,
+            that.size
+    );
+    res.size = that.size;
+    return res;
+  }
 
   /**
    * Creates a new {@code ArrayStack} containing the same elements as the given stack.
@@ -151,21 +165,38 @@ public class ArrayStack<T> extends AbstractStack<T> implements Stack<T> {
    * @param that the generic {@code Stack} to be copied.
    * @return a new {@code ArrayStack} with the same elements and order.
    */
-  public static <T> ArrayStack<T> copyOf(Stack<T> that) { throw new UnsupportedOperationException("Not implemented yet"); }
+  public static <T> ArrayStack<T> copyOf(Stack<T> that) {
+    @SuppressWarnings("unchecked")
+    T[] temp = (T[]) new Object[that.size()];
+
+    while(!that.isEmpty()) {
+      temp[that.size() - 1] = that.top();
+      that.pop();
+    }
+
+    for(T e : temp) {
+      that.push(e);
+    }
+    return of(temp);
+  }
 
   /**
    * {@inheritDoc}
    * <p> Time complexity: O(1)
    */
   @Override
-  public boolean isEmpty() { throw new UnsupportedOperationException("Not implemented yet"); }
+  public boolean isEmpty() {
+    return size == 0;
+  }
 
   /**
    * {@inheritDoc}
    * <p> Time complexity: O(1)
    */
   @Override
-  public int size() { throw new UnsupportedOperationException("Not implemented yet"); }
+  public int size() {
+    return size;
+  }
 
   /**
    * Ensures that the capacity is sufficient to add one more element.
@@ -183,28 +214,46 @@ public class ArrayStack<T> extends AbstractStack<T> implements Stack<T> {
    * underlying array needs to be resized.
    */
   @Override
-  public void push(T element) { throw new UnsupportedOperationException("Not implemented yet"); }
+  public void push(T element) {
+    if(elements.length == size) {
+      elements = Arrays.copyOf(elements, elements.length + 1);
+    }
+    elements[size] = element;
+    size++;
+  }
 
   /**
    * {@inheritDoc}
    * <p> Time complexity: O(1)
    */
   @Override
-  public T top() { throw new UnsupportedOperationException("Not implemented yet"); }
+  public T top() {
+    if(isEmpty()) throw new EmptyStackException("ArrayStack#top() called");
+    return elements[size - 1];
+  }
 
   /**
    * {@inheritDoc}
    * <p> Time complexity: O(1)
    */
   @Override
-  public void pop() { throw new UnsupportedOperationException("Not implemented yet"); }
+  public void pop() {
+    if(isEmpty()) throw new EmptyStackException("ArrayStack#pop() called");
+    elements[size] = null;
+    size--;
+  }
 
   /**
    * {@inheritDoc}
    * <p> Time complexity: O(n)
    */
   @Override
-  public void clear() { throw new UnsupportedOperationException("Not implemented yet"); }
+  public void clear() {
+    while(!isEmpty()) {
+      elements[size] = null;
+      size--;
+    }
+  }
 
   /**
    * Provides an iterable that traverses the elements from the top of the stack to the bottom.
