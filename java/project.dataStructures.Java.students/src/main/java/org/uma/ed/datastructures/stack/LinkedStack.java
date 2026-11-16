@@ -117,7 +117,21 @@ public class LinkedStack<T> extends AbstractStack<T> implements Stack<T> {
    * @param that the {@code LinkedStack} to be copied.
    * @return a new {@code LinkedStack} with the same elements and order.
    */
-  public static <T> LinkedStack<T> copyOf(LinkedStack<T> that) { throw new UnsupportedOperationException("Not implemented yet"); }
+  public static <T> LinkedStack<T> copyOf(LinkedStack<T> that) {
+  	LinkedStack<T> res = new LinkedStack<>();
+   	if(that.top != null) {
+    	res.top = new Node<T>(that.top(), null);
+     	Node<T> last = res.top;
+      	Node<T> current = that.top.next;
+       	while(current != null) {
+        	last.next = new Node<T>(current.element, null);
+         	last = last.next;
+          	current = current.next;
+        }
+        res.size = that.size;
+    }
+   	return res;
+  }
 
   /**
    * Creates a new {@code LinkedStack} containing the same elements as the given stack.
@@ -132,49 +146,77 @@ public class LinkedStack<T> extends AbstractStack<T> implements Stack<T> {
    * @param that the generic {@code Stack} to be copied.
    * @return a new {@code LinkedStack} with the same elements and order.
    */
-  public static <T> LinkedStack<T> copyOf(Stack<T> that) { throw new UnsupportedOperationException("Not implemented yet"); }
+  public static <T> LinkedStack<T> copyOf(Stack<T> that) {
+    @SuppressWarnings("unchecked")
+    T[] temp = (T[]) new Object[that.size()];
+    while(!that.isEmpty()) {
+      temp[that.size() - 1] = that.top();
+      that.pop();
+    }
+    for(T e : temp) {
+      that.push(e);
+    }
+    return of(temp);
+  }
 
   /**
    * {@inheritDoc}
    * <p> Time complexity: O(1)
    */
   @Override
-  public boolean isEmpty() { throw new UnsupportedOperationException("Not implemented yet"); }
+  public boolean isEmpty() {
+  	return size == 0;
+  }
 
   /**
    * {@inheritDoc}
    * <p> Time complexity: O(1)
    */
   @Override
-  public int size() { throw new UnsupportedOperationException("Not implemented yet"); }
+  public int size() {
+  	return size;
+  }
 
   /**
    * {@inheritDoc}
    * <p> Time complexity: O(1)
    */
   @Override
-  public T top() { throw new UnsupportedOperationException("Not implemented yet"); }
+  public T top() {
+  	if(isEmpty()) throw new EmptyStackException("Called at LinkedStack#top()");
+  	return top.element;
+  }
 
   /**
    * {@inheritDoc}
    * <p> Time complexity: O(1)
    */
   @Override
-  public void pop() { throw new UnsupportedOperationException("Not implemented yet"); }
+  public void pop() {
+    if(isEmpty()) throw new EmptyStackException("Called at LinkedStack#pop()");
+    top = top.next;
+    size--;
+  }
 
   /**
    * {@inheritDoc}
    * <p> Time complexity: O(1)
    */
   @Override
-  public void push(T element) { throw new UnsupportedOperationException("Not implemented yet"); }
+  public void push(T element) {
+  	top = new Node<T>(element, top);
+   	size++;
+  }
 
   /**
    * {@inheritDoc}
    * <p> Time complexity: O(1)
    */
   @Override
-  public void clear() { throw new UnsupportedOperationException("Not implemented yet"); }
+  public void clear() {
+  	top = null;
+   	size = 0;
+  }
 
   /**
    * Provides an iterable that traverses the elements from the top of the stack to the bottom.
