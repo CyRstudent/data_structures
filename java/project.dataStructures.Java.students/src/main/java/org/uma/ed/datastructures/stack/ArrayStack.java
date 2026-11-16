@@ -70,7 +70,9 @@ public class ArrayStack<T> extends AbstractStack<T> implements Stack<T> {
    * @param <T> the type of elements in the stack.
    * @return an empty {@code ArrayStack}.
    */
-  public static <T> ArrayStack<T> empty() { throw new UnsupportedOperationException("Not implemented yet"); }
+  public static <T> ArrayStack<T> empty() {
+    return new ArrayStack<T>(DEFAULT_INITIAL_CAPACITY);
+  }
 
   /**
    * Creates an empty {@code ArrayStack} with a specified initial capacity.
