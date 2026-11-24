@@ -2,6 +2,8 @@ package org.uma.ed.datastructures.heap;
 
 import java.util.Comparator;
 import org.uma.ed.datastructures.list.JDKArrayList;
+import org.uma.ed.datastructures.queue.JDKQueue;
+import org.uma.ed.datastructures.queue.Queue;
 
 /**
  * An implementation of the {@link Heap} interface using a maxiphobic heap.
@@ -108,7 +110,22 @@ public class MaxiphobicHeap<T> implements Heap<T> {
    *
    * @return Maxiphobic heap with elements in nodes
    */
-  private static <T> MaxiphobicHeap<T> merge(Comparator<T> comparator, JDKArrayList<Node<T>> nodes) { throw new UnsupportedOperationException("Not implemented yet"); }
+  private static <T> MaxiphobicHeap<T> merge(Comparator<T> comparator, JDKArrayList<Node<T>> nodes) {
+  	Queue<Node<T>> queue = JDKQueue.empty();
+   MaxiphobicHeap<T> heap = new MaxiphobicHeap<>(comparator);
+   while(queue.size() > 1) {
+   	Node<T> tree1 = queue.first();
+    queue.dequeue();
+    Node<T> tree2 = queue.first();
+    queue.dequeue();
+    Node<T> tree3 = heap.merge(tree1, tree2);
+    queue.enqueue(tree3);
+   }
+   if(queue.isEmpty()) {
+   	heap.root = queue.first();
+   }
+   return heap;
+  }
 
   /**
    * Constructs a Maxiphobic Heap from a sequence of elements and a comparator.
@@ -227,7 +244,23 @@ public class MaxiphobicHeap<T> implements Heap<T> {
   /**
    * Merges two maxiphobic heaps.
    */
-  private Node<T> merge(Node<T> node1, Node<T> node2) { throw new UnsupportedOperationException("Not implemented yet"); }
+  private Node<T> merge(Node<T> node1, Node<T> node2) {
+  	if(node1 == null) return node2;
+   	if(node2 == null) return node1;
+    if(comparator.compare(node2.element, node1.element) < 0) {
+    	Node<T> temp = node1;
+     	node1 = node2;
+      	node2 = temp;
+    }
+    node1.weight  += node2.weight;
+
+    Node<T> tree1 = node1.left;
+    Node<T> tree2 = node1.right;
+    Node<T> tree3 = node2;
+    if(tree2.weight > weight(tree1)) {
+
+    }
+  }
 
   /**
    * {@inheritDoc}

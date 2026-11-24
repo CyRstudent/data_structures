@@ -144,7 +144,9 @@ public class ArrayQueue<T> extends AbstractQueue<T> implements Queue<T> {
    * @param that the {@code ArrayQueue} to be copied.
    * @return a new {@code ArrayQueue} with the same elements and order.
    */
-  public static <T> ArrayQueue<T> copyOf(ArrayQueue<T> that) { throw new UnsupportedOperationException("Not implemented yet"); }
+  public static <T> ArrayQueue<T> copyOf(ArrayQueue<T> that) {
+  	return from(that.elements());
+  }
 
   /**
    * Creates a new {@code ArrayQueue} containing the same elements as the given queue.
@@ -159,21 +161,34 @@ public class ArrayQueue<T> extends AbstractQueue<T> implements Queue<T> {
    * @param that the generic {@code Queue} to be copied.
    * @return a new {@code ArrayQueue} with the same elements and order.
    */
-  public static <T> ArrayQueue<T> copyOf(Queue<T> that) { throw new UnsupportedOperationException("Not implemented yet"); }
+  public static <T> ArrayQueue<T> copyOf(Queue<T> that) {
+  	@SuppressWarnings("unchecked")
+  	T[] temp = (T[]) new Object[that.size()];
+   	while(!that.isEmpty()) {
+    	temp[that.size() - 1] = that.first();
+     	that.dequeue();
+    }
+    for(T e : temp) that.enqueue(e);
+   	return of(temp);
+  }
 
   /**
    * {@inheritDoc}
    * <p> Time complexity: O(1)
    */
   @Override
-  public boolean isEmpty() { throw new UnsupportedOperationException("Not implemented yet"); }
+  public boolean isEmpty() {
+  	return size == 0;
+  }
 
   /**
    * {@inheritDoc}
    * <p> Time complexity: O(1)
    */
   @Override
-  public int size() { throw new UnsupportedOperationException("Not implemented yet"); }
+  public int size() {
+  	return size;
+  }
 
   /**
    * Returns the position immediately following {@code index} in the circular array.
@@ -212,28 +227,43 @@ public class ArrayQueue<T> extends AbstractQueue<T> implements Queue<T> {
    * underlying array needs to be resized.
    */
   @Override
-  public void enqueue(T element) { throw new UnsupportedOperationException("Not implemented yet"); }
+  public void enqueue(T element) {
+  	ensureCapacity();
+   	elements[size] = element;
+    size++;
+    last = size - 1;
+  }
 
   /**
    * {@inheritDoc}
    * <p> Time complexity: O(1)
    */
   @Override
-  public T first() { throw new UnsupportedOperationException("Not implemented yet"); }
+  public T first() {
+  	if(isEmpty()) throw new EmptyQueueException("Called at ArrayQueue#first()");
+   	return elements[first];
+  }
 
   /**
    * {@inheritDoc}
    * <p> Time complexity: O(1)
    */
   @Override
-  public void dequeue() { throw new UnsupportedOperationException("Not implemented yet"); }
+  public void dequeue() {
+  	if(isEmpty()) throw new EmptyQueueException("Called at ArrayQueue#dequeue");
+  	elements[first] = elements[first + 1];
+   	first++;
+    size--;
+  }
 
   /**
    * {@inheritDoc}
    * <p> Time complexity: O(n)
    */
   @Override
-  public void clear() { throw new UnsupportedOperationException("Not implemented yet"); }
+  public void clear() {
+
+  }
 
   /**
    * Provides an iterable that traverses the elements from the front to the rear of the queue.
