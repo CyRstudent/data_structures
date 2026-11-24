@@ -121,7 +121,7 @@ public class MaxiphobicHeap<T> implements Heap<T> {
     Node<T> tree3 = heap.merge(tree1, tree2);
     queue.enqueue(tree3);
    }
-   if(queue.isEmpty()) {
+   if(!queue.isEmpty()) {
    	heap.root = queue.first();
    }
    return heap;
